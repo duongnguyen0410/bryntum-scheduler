@@ -1,0 +1,10 @@
+{
+  "resources": [
+    { "id": "r1", 
+      "name": "John Doe" 
+    },
+    { "id": "r2", 
+      "name": "Jane Smith" 
+    }
+  ]
+}
