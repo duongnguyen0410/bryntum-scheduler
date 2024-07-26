@@ -12,9 +12,9 @@ const SchedulerRemoteData: React.FC = () => {
     endDate: new Date(2024, 2, 25),
     crudManager: {
       autoLoad: true,
-      autoSync: true,
-      loadUrl: "/api/load",
-      syncUrl: "/api/sync",
+      autoSync: false,
+      loadUrl: "https://scheduler-api-wbu7.onrender.com/schedule/data",
+      // syncUrl: "/api/sync",
     },
     viewPreset: "hourAndDay",
     eventStyle: "border",
