@@ -1,27 +1,65 @@
 "use client";
 
-import React from "react";
 import {
   BryntumScheduler,
   BryntumSchedulerBaseProps,
 } from "@bryntum/scheduler-react";
+import { AssignmentStore, DependencyStore, EventStore, ResourceStore } from "@bryntum/scheduler";
+import { useRef } from "react";
+
+const resourceStore = new ResourceStore({
+  autoLoad: true,
+  autoCommit: true,
+  readUrl: "http://localhost:8000/schedulers/resources/",
+  updateUrl: "http://localhost:8000/schedulers/resources/remote/update/",
+  deleteUrl: "http://localhost:8000/schedulers/resources/remote/delete/",
+});
+
+const eventStore = new EventStore({
+  autoLoad: true,
+  autoCommit: true,
+  readUrl: "http://localhost:8000/schedulers/events/",
+  createUrl: "http://localhost:8000/schedulers/events/remote/create/",
+  updateUrl: "http://localhost:8000/schedulers/events/remote/update/",
+  deleteUrl: "http://localhost:8000/schedulers/events/remote/delete/",
+  fields: [
+    { name: "id", type: "string" },
+    { name: "resourceId", type: "string" },
+    { name: "startDate", type: "date" },
+    { name: "endDate", type: "date" },
+    { name: "name", type: "string" },
+    { name: "duration", type: "number" },
+    { name: "durationUnit", type: "string" },
+    { name: "cls", type: "string" },
+    { name: "exceptionDates", type: "array" },
+    { name: "allDay", type: "boolean" },
+  ],
+});
+
+const assignmentStore = new AssignmentStore({
+  autoLoad: true,
+  autoCommit: true,
+  readUrl: "http://localhost:8000/schedulers/assignments/",
+  createUrl: "http://localhost:8000/schedulers/assignments/remote/create/",
+  updateUrl: "http://localhost:8000/schedulers/assignments/remote/update/",
+  deleteUrl: "http://localhost:8000/schedulers/assignments/remote/delete/",
+});
+
+const dependenciesStore = new DependencyStore({
+  autoLoad: true,
+  autoCommit: true,
+  readUrl: "http://localhost:8000/schedulers/dependencies/",
+  createUrl: "http://localhost:8000/schedulers/dependencies/remote/create/",
+})
 
 const SchedulerRemoteData: React.FC = () => {
   const schedulerConfig: BryntumSchedulerBaseProps = {
     startDate: new Date(2024, 2, 21),
     endDate: new Date(2024, 2, 25),
-    crudManager: {
-      autoLoad: true,
-      autoSync: true,
-      transport: {
-        load: {
-          url: "http://localhost:8000/schedulers/",
-        },
-        sync: {
-          url: "http://localhost:8000/schedulers/events/sync/",
-        },
-      },
-    },
+    resourceStore: resourceStore,
+    eventStore: eventStore,
+    assignmentStore: assignmentStore,
+    dependencyStore: dependenciesStore,
     viewPreset: "hourAndDay",
     eventStyle: "border",
     timeRangesFeature: true,
@@ -35,7 +73,7 @@ const SchedulerRemoteData: React.FC = () => {
         showImage: false,
       },
     ],
-    stripeFeature: true,
+    stripeFeature: false,
     dependenciesFeature: true,
   };
 
