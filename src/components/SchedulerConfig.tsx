@@ -22,7 +22,7 @@ const eventStore = new EventStore({
 
 const resourceStore = new ResourceStore({
   data: [
-    { id: "r1", name: "John Doe" },
+    { id: "r1", name: "John Doe", children: [{ id: "r1.1", name: "John Doe Jr." }, { id: "r1.2", name: "aaaa" }] },
     { id: "r2", name: "Jane Smith" },
   ],
 });
@@ -38,15 +38,15 @@ const schedulerConfig: BryntumSchedulerProps = {
   barMargin: 10,
   columns: [
     {
-      type: "resourceInfo",
+      type: "tree",
       text: "Name",
       field: "name",
       width: 200,
-      showImage: false,
     },
   ],
   stripeFeature: true,
   dependenciesFeature: true,
+  treeFeature: true,
 };
 
 export { schedulerConfig };
