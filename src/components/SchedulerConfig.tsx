@@ -1,5 +1,8 @@
+import ProgressBar from "@/app/components/ProgressBar";
 import { AssignmentStore, EventStore, ResourceStore } from "@bryntum/scheduler";
 import { BryntumSchedulerProps } from "@bryntum/scheduler-react";
+import { Model, SchedulerResourceModel } from "@bryntum/schedulerpro";
+import { BryntumSchedulerProProps } from "@bryntum/schedulerpro-react";
 
 const eventStore = new EventStore({
   data: [
@@ -22,19 +25,24 @@ const eventStore = new EventStore({
 
 const resourceStore = new ResourceStore({
   data: [
-    { id: "r1", name: "John Doe", children: [{ id: "r1.1", name: "John Doe Jr." }, { id: "r1.2", name: "aaaa" }] },
+    {
+      id: "r1",
+      name: "John Doe",
+      expanded: true,
+      children: [
+        { id: "r1.1", name: "John Doe Jr." },
+        { id: "r1.2", name: "aaaa" },
+      ],
+    },
     { id: "r2", name: "Jane Smith" },
   ],
 });
 
-const schedulerConfig: BryntumSchedulerProps = {
+const schedulerConfig: BryntumSchedulerProProps = {
   startDate: new Date(2024, 2, 21),
   endDate: new Date(2024, 2, 25),
-  eventStore: eventStore,
-  resourceStore: resourceStore,
   viewPreset: "hourAndDay",
   eventStyle: "border",
-  timeRangesFeature: true,
   barMargin: 10,
   columns: [
     {
@@ -43,10 +51,25 @@ const schedulerConfig: BryntumSchedulerProps = {
       field: "name",
       width: 200,
     },
+    {
+      type: "percent",
+      text: "Progress",
+      width: 220,
+      align: "center",
+      editor: false,
+    },
   ],
-  stripeFeature: true,
+  stripeFeature: false,
   dependenciesFeature: true,
   treeFeature: true,
+
+  project: {
+    transport: {
+      load: {
+        url: "data/data.json",
+      },
+    },
+  },
 };
 
 export { schedulerConfig };

@@ -4,8 +4,16 @@ import {
   BryntumScheduler,
   BryntumSchedulerBaseProps,
 } from "@bryntum/scheduler-react";
-import { AssignmentStore, DependencyStore, EventStore, ResourceStore } from "@bryntum/schedulerpro";
-import { BryntumSchedulerPro, BryntumSchedulerProBaseProps } from "@bryntum/schedulerpro-react";
+import {
+  AssignmentStore,
+  DependencyStore,
+  EventStore,
+  ResourceStore,
+} from "@bryntum/schedulerpro";
+import {
+  BryntumSchedulerPro,
+  BryntumSchedulerProBaseProps,
+} from "@bryntum/schedulerpro-react";
 
 const resourceStore = new ResourceStore({
   autoLoad: true,
@@ -50,7 +58,7 @@ const dependenciesStore = new DependencyStore({
   autoCommit: true,
   readUrl: "http://localhost:8000/schedulers/dependencies/",
   createUrl: "http://localhost:8000/schedulers/dependencies/remote/create/",
-})
+});
 
 const SchedulerRemoteData: React.FC = () => {
   const schedulerConfig: BryntumSchedulerProBaseProps = {
@@ -69,7 +77,16 @@ const SchedulerRemoteData: React.FC = () => {
         type: "tree",
         text: "Work Centers",
         field: "name",
-        width: 300,
+        width: 200,
+      },
+      {
+        type: "percent",
+        field: "percentDone",
+        text: "Progress",
+        width: 120,
+        align: "center",
+        showValue: true,
+        editor: false,
       },
     ],
     stripeFeature: false,

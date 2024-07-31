@@ -5,7 +5,23 @@
       {
         "id": "r1",
         "name": "Celia",
-        "city": "Barcelona"
+        "city": "Barcelona",
+        "expanded": true,
+        "percentDone": 0,
+        "children": [
+          {
+            "id": "r1.1",
+            "name": "Celia's child",
+            "percentDone": 60,
+            "city": "Barcelona"
+          },
+          {
+            "id": "r1.2",
+            "name": "Celia's child 2",
+            "percentDone": 30,
+            "city": "Barcelona"
+          }
+        ]
       },
       {
         "id": "r2",
