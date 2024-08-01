@@ -1,6 +1,6 @@
 "use client";
 
-import { schedulerConfig } from "@/components/SchedulerConfig";
+import { schedulerConfig } from "@/components/Scheduler/SchedulerConfig";
 import { BryntumDemoHeader, BryntumScheduler } from "@bryntum/scheduler-react";
 import { BryntumSchedulerPro } from "@bryntum/schedulerpro-react";
 import { Fragment, useEffect, useRef } from "react";

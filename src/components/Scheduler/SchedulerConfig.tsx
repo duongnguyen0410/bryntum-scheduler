@@ -1,4 +1,3 @@
-import ProgressBar from "@/app/components/ProgressBar";
 import { AssignmentStore, EventStore, ResourceStore } from "@bryntum/scheduler";
 import { BryntumSchedulerProps } from "@bryntum/scheduler-react";
 import { Model, SchedulerResourceModel } from "@bryntum/schedulerpro";
