@@ -14,6 +14,7 @@ import {
   ScrollManager,
   Tooltip,
   Toast,
+  ResourceModel,
 } from "@bryntum/schedulerpro";
 
 
@@ -75,7 +76,7 @@ export default class Drag extends DragHelper {
     );
     proxy.innerHTML = `<div class="b-sch-event b-has-content b-sch-event-withicon">
             <div class="b-sch-event-content">
-                <i class="${task.get("iconCls")}"></i> ${task.get("name")}
+              ${task.get("name")}
             </div>
         </div>`;
 
@@ -197,7 +198,7 @@ export default class Drag extends DragHelper {
   }: {
     context: {
       task: Task;
-      resource: SchedulerResourceModel;
+      resource: ResourceModel;
       element: HTMLElement;
       target: HTMLElement;
       grabbed: HTMLElement;
@@ -231,7 +232,11 @@ export default class Drag extends DragHelper {
         task.startDate = date;
 
         task.assign(resource);
+        
+        console.log(task);
+        console.log(schedule.eventStore);
         schedule.eventStore.add(task);
+        
       }
 
       // Dropped on a scheduled event, display toast

@@ -1,7 +1,7 @@
-import { DateHelper, SchedulerEventStore } from "@bryntum/schedulerpro";
+import { DateHelper, EventStore } from "@bryntum/schedulerpro";
 import Task from "./Task";
 
-export default class TaskStore extends SchedulerEventStore {
+export default class TaskStore extends EventStore {
   static get $name() {
     return "TaskStore";
   }

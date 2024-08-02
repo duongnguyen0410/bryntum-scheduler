@@ -1,7 +1,7 @@
-import { SchedulerEventModel } from "@bryntum/schedulerpro";
+import { EventModel } from "@bryntum/schedulerpro";
 
 
-export default class Task extends SchedulerEventModel {
+export default class Task extends EventModel {
     static get $name() {
         return 'Task';
     }
@@ -10,7 +10,6 @@ export default class Task extends SchedulerEventModel {
         return {
             durationUnit: 'h',
             name: 'New event',
-            iconCls: 'b-fa b-fa-calendar',
         }
     }
 

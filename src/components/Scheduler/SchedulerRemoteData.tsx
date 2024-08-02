@@ -5,6 +5,7 @@ import dependencyStore from "@/stores/dependenciesStore";
 import eventStore from "@/stores/eventsStore";
 import resourceStore from "@/stores/resourcesStore";
 import {
+  DomConfig,
   Model,
   SchedulerEventModel,
   StringHelper,
@@ -14,7 +15,7 @@ import {
   BryntumSchedulerProBaseProps,
 } from "@bryntum/schedulerpro-react";
 
-const schedulerConfig: BryntumSchedulerProBaseProps = {
+const schedulerConfig: BryntumSchedulerProBaseProps = { 
   startDate: new Date(2024, 2, 21),
   endDate: new Date(2024, 2, 25),
 
@@ -61,7 +62,7 @@ const schedulerConfig: BryntumSchedulerProBaseProps = {
 };
 
 const unplannedGridConfig: BryntumGridProps = {
-  rowHeight: 50,
+  rowHeight: 60,
   cls: "b-unplannedgrid",
   columns: [
     {
@@ -71,7 +72,11 @@ const unplannedGridConfig: BryntumGridProps = {
       htmlEncode: false,
       renderer: (data: { record: Model }) => {
         const record = data.record as SchedulerEventModel;
-        return StringHelper.xss`</i>${record.name}`;
+        return StringHelper.xss`${record.name}`;
+      },
+      headerRenderer: ({ headerElement }) => {
+        headerElement.style.height = "56px";
+        return StringHelper.xss`Unplanned tasks`;
       },
     },
     {
